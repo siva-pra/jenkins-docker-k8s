@@ -15,7 +15,7 @@ pipeline{
              steps{
                  withCredentials([file(credentialsId: 'docker_passwd', variable: 'dockerpasswd')]){
                     sh 'docker login -u sivaprasad1996 -u ${dockerpasswd}' 
-                    sh 'docekr image push sivaprasad1996/app:latest' 
+                    sh 'docker image push sivaprasad1996/app:latest' 
                 }
             }
 
