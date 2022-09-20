@@ -1,15 +1,18 @@
 pipeline{
     agent any 
-   
-    stages{
-        stage("docker image build"){
+       stages{
+        stage('SCM'){
             steps{
-                    sh "docker image build -t sivaprasad1996/app:latest ."
+                git 'https://github.com/siva-pra/jenkins-docker-k8s.git'
             }
-            
+        }
+        stage("docker image build"){
+             steps{
+                    sh 'docker image build -t sivaprasad1996/app:latest .'
+            }
         }
         stage('docker imgae push'){
-            steps{
+             steps{
                  withCredentials([file(credentialsId: 'docker_passwd', variable: 'dockerpasswd')]){
                     sh 'docker login -u sivaprasad1996 -u ${dockerpasswd}' 
                     sh 'docekr image push sivaprasad1996/app:latest' 

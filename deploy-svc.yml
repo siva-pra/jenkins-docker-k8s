@@ -31,7 +31,8 @@ spec:
     - name: app
       port: 3000
       targetPort: 3000
+      NodePort: 32000
       protocol: TCP
   selector:
     app: app
-  type: NodePort
+  type: LoadBalancer
