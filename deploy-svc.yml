@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app
+      version: 1.0
+  template:
+   metadata:
+     labels:
+       app: app
+       version: 1.0
+   spec:
+     containers:
+       - name: app
+         image: sivaprasad1996/app:latest
+         ports:
+            - containerPort: 3000
+              protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+   name: service-example
+spec: 
+  ports:
+    - name: app
+      port: 3000
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: app
+  type: NodePort
